@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ronnie Phillips — Product Leader · Frontier AI · Retail</title>
-  <meta name="description" content="Ronnie Phillips. Product Owner at Carter's Inc. Leading multi-discipline retail technology — frontier AI, mobile, and the platform behind it." />
+  <meta name="description" content="Ronnie Phillips. Product Owner at Carter's Inc. Leading multi-discipline retail technology — frontier AI, mobile, and the platform behind both." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,18 +24,16 @@
       --fg-3:      #6b665d;
       --fg-4:      #3d3a35;
 
-      /* Primary signal */
       --ember:     #d97757;
       --ember-2:   #b85e3f;
       --ember-soft:rgba(217, 119, 87, 0.10);
 
-      /* Secondary palette — autumn family, all desaturated */
-      --gold:      #c9a36a;     /* AWS */
-      --amber:     #d4b265;     /* muted yellow — Mobile/Retail */
-      --rose:      #c08a8a;     /* dusty pink — Analytics */
-      --moss:      #7a8c5a;     /* Product/Delivery */
-      --rust:      #a85432;     /* Languages */
-      --slate:     #6b7480;     /* counterweight */
+      --gold:      #c9a36a;
+      --amber:     #d4b265;
+      --rose:      #c08a8a;
+      --moss:      #7a8c5a;
+      --rust:      #a85432;
+      --slate:     #6b7480;
 
       --max:       1200px;
       --gutter:    clamp(20px, 4vw, 44px);
@@ -58,8 +56,22 @@
       overflow-x: hidden;
     }
 
+    /* Mobile-only safety — desktop layout untouched */
+    @media (max-width: 720px) {
+      html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .meta-row { gap: 14px; font-size: 10px; }
+      .stat-num { font-size: 18px; }
+      .hero-actions { width: 100%; }
+      .btn { flex: 0 0 auto; }
+      .tool, .proj-tags span, .exp-tags span { word-break: break-word; }
+      .keyboard-decor { display: none !important; }
+    }
+
     /* ============================================
-       AMBIENT — scroll-reactive background layer
+       AMBIENT
        ============================================ */
     .ambient {
       position: fixed;
@@ -88,6 +100,31 @@
         radial-gradient(ellipse 50% 40% at 10% 30%, rgba(122, 140, 90, 0.04) 0%, transparent 70%);
       opacity: calc(1 - var(--scroll, 0) * 0.5);
       transition: opacity 0.4s ease;
+    }
+
+    /* Decorative keyboard — slides off as you scroll */
+    .keyboard-decor {
+      position: fixed;
+      bottom: 6%;
+      right: -3%;
+      width: 42vw;
+      max-width: 640px;
+      min-width: 440px;
+      z-index: 0;
+      opacity: 0.28;
+      pointer-events: none;
+      transform: translateX(calc(var(--scroll, 0) * 130%));
+      transition: opacity 0.6s ease;
+      filter: saturate(0.6) contrast(1.05);
+      mix-blend-mode: screen;
+    }
+    .keyboard-decor img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .keyboard-decor { transform: none !important; }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -369,7 +406,7 @@
     }
 
     /* ============================================
-       SECTION SCAFFOLDING — alternating + delineated
+       SECTION SCAFFOLDING
        ============================================ */
     .panel {
       position: relative;
@@ -378,7 +415,6 @@
     .panel.elev {
       background: var(--bg-1);
     }
-    /* delineation: 1px hairline that draws in when panel enters viewport */
     .panel + .panel::before {
       content: "";
       position: absolute;
@@ -423,7 +459,6 @@
       align-items: baseline;
       position: relative;
     }
-    /* Scanline shimmer that fires once when the section header enters view */
     .section-head::after {
       content: "";
       position: absolute;
@@ -512,11 +547,6 @@
       font-weight: 400;
       letter-spacing: -0.01em;
     }
-    .about-prose p + p {
-      font-size: 15px;
-      color: var(--fg-2);
-      line-height: 1.65;
-    }
     .about-prose strong { color: var(--fg); font-weight: 500; }
     .about-prose .ember { color: var(--ember); }
     @media (max-width: 720px) {
@@ -524,7 +554,7 @@
     }
 
     /* ============================================
-       SHIPPED — featured products with hover effect
+       SHIPPED
        ============================================ */
     .shipped-grid {
       display: grid;
@@ -541,7 +571,6 @@
       overflow: hidden;
     }
     .shipped:last-child { border-right: none; }
-    /* Diagonal noise shimmer on hover — gives weight without chrome */
     .shipped::before {
       content: "";
       position: absolute;
@@ -745,7 +774,6 @@
       border-color: var(--ember);
       color: var(--fg);
     }
-    /* secondary featured — for Mobile/Retail (amber) */
     .stack-row.secondary .stack-cat { color: var(--amber); }
     .stack-row.secondary .stack-cat::after {
       content: "";
@@ -1113,6 +1141,9 @@
 <body id="top">
 
   <div class="ambient" aria-hidden="true"></div>
+  <div class="keyboard-decor" aria-hidden="true">
+    <img src="assets/Asset2.png" alt="" loading="lazy">
+  </div>
 
   <!-- ICON SYMBOL DEFS -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1192,17 +1223,14 @@
         <rect x="11" y="5" width="6" height="9" rx="1"/>
         <rect x="19" y="5" width="2" height="6" rx="1"/>
       </symbol>
-      <!-- Mobile / phone -->
       <symbol id="i-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <rect x="6" y="2" width="12" height="20" rx="2"/>
         <path d="M11 18h2"/>
       </symbol>
-      <!-- Robot/Android-y -->
       <symbol id="i-droid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <rect x="5" y="9" width="14" height="10" rx="2"/>
         <path d="M8 9V6M16 9V6M9 14h0M15 14h0M3 12v3M21 12v3M9 19v2M15 19v2"/>
       </symbol>
-      <!-- Box (apps/packages) -->
       <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 8l-9-5-9 5 9 5 9-5z"/>
         <path d="M3 8v8l9 5 9-5V8M12 13v8"/>
@@ -1243,7 +1271,7 @@
       </h1>
 
       <p class="lede">
-        I'm <strong>Ronnie Phillips</strong> — Product Owner at Carter's, leading a multi-discipline team that ships <strong>frontier AI</strong>, <strong>retail mobile apps</strong>, and the platform behind both. AskCarter, MCPO, and POD AI on the AI track; Kotlin and Android for the field associates we build for. Bread-and-butter is product management, Python, and SQL.
+        I'm <strong>Ronnie Phillips</strong> — Product Owner at Carter's, leading a multi-discipline team that ships <strong>frontier AI</strong>, <strong>retail mobile apps</strong>, and the platform behind both. AskCarter, MCP &amp; POD AI on the AI track; Kotlin and Android for the field associates we build for. Bread-and-butter is product management, Python, and SQL.
       </p>
 
       <div class="hero-actions">
@@ -1291,8 +1319,8 @@
         <div class="stat-label">Lead Instructor · NU</div>
       </div>
       <div class="stat">
-        <div class="stat-num">F500</div>
-        <div class="stat-label">Production Scale</div>
+        <div class="stat-num">MULTI</div>
+        <div class="stat-label">Discipline Team Lead</div>
       </div>
     </div>
   </header>
@@ -1314,7 +1342,6 @@
           </dl>
         </aside>
         <div class="about-prose">
-          <p>I lead the AI most product orgs are still talking about — agents wired into legacy systems, retrieval grounded in operational data — alongside the Kotlin and Android apps the field actually uses every day.</p>
           <p>My thesis: <strong>frontier capability only matters when it survives contact with production.</strong> That goes for the AGI-class work and the mobile experience an associate opens 200 times a shift. Bread-and-butter is product management, <span class="ember">Python, and SQL</span> — the rest is what I build with the team I lead.</p>
         </div>
       </div>
@@ -1336,16 +1363,16 @@
           <div class="shipped-meta">PRODUCTION · ENTERPRISE</div>
         </div>
         <div class="shipped">
-          <div class="shipped-tag">ORCHESTRATION</div>
-          <div class="shipped-name">MCPO</div>
-          <p class="shipped-desc">Model context and protocol orchestration layer. Connects frontier models to enterprise systems with the governance and observability production demands.</p>
-          <div class="shipped-meta">PRODUCTION · INFRA</div>
+          <div class="shipped-tag">ORCHESTRATION · AGENT FABRIC</div>
+          <div class="shipped-name">MCP &amp; POD AI</div>
+          <p class="shipped-desc">Model Context Protocol layer paired with the agent system driving operational outcomes across the field. Frontier capability turned into measurable retail performance.</p>
+          <div class="shipped-meta">PRODUCTION · INFRA · OPS</div>
         </div>
         <div class="shipped">
-          <div class="shipped-tag">AGENT FABRIC</div>
-          <div class="shipped-name">POD AI</div>
-          <p class="shipped-desc">Agent system driving operational outcomes across the field — purpose-built to turn frontier capability into measurable retail performance.</p>
-          <div class="shipped-meta">PRODUCTION · OPS</div>
+          <div class="shipped-tag">MOBILE</div>
+          <div class="shipped-name">Android Development</div>
+          <p class="shipped-desc">Kotlin and Android apps shipped to the field associates who run Carter's stores. Built for the moments that happen 200 times a shift — fast, reliable, in-pocket.</p>
+          <div class="shipped-meta">PRODUCTION · FIELD</div>
         </div>
       </div>
     </section>
@@ -1367,7 +1394,7 @@
           </div>
           <div>
             <h3 class="exp-role">Product Owner — Field Tech, AI &amp; Mobile</h3>
-            <p class="exp-desc">Lead a multi-discipline team across the AI portfolio (AskCarter, MCPO, POD AI) and the Kotlin / Android apps that field associates use daily. Scope frontier capability into production, partner with eng + ops on agentic delivery, and own the roadmap for the apps that move retail performance.</p>
+            <p class="exp-desc">Lead a multi-discipline team across the AI portfolio (AskCarter, MCP &amp; POD AI) and the Kotlin / Android apps that field associates use daily. Scope frontier capability into production, partner with eng + ops on agentic delivery, and own the roadmap for the apps that move retail performance.</p>
             <div class="exp-tags">
               <span class="pri">Frontier AI</span>
               <span>Mobile · Android</span><span>Agents</span><span>Roadmap</span><span>Team Lead</span>
@@ -1714,7 +1741,6 @@
       if (y > 40) nav.classList.add('scrolled');
       else nav.classList.remove('scrolled');
 
-      // Drive ambient layer
       const max = Math.max(window.innerHeight * 1.2, 600);
       const t = Math.min(1, y / max);
       document.documentElement.style.setProperty('--scroll', t.toFixed(3));
@@ -1722,7 +1748,6 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Reveal animations
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -1737,7 +1762,6 @@
       io.observe(el);
     });
 
-    // Panel hairline drawing + section-head scanline
     const panelIO = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -1751,7 +1775,6 @@
       panelIO.observe(el);
     });
 
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener('click', (e) => {
         const id = a.getAttribute('href');
