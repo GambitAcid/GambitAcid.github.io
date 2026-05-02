@@ -1,718 +1,1769 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ronnie Phillips</title>
-  <meta name="description"
-    content="Creative CV is a HTML resume template for professionals. Built with Bootstrap 4, Now UI Kit and FontAwesome, this modern and responsive design template is perfect to showcase your portfolio, skils and experience." />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Font Awesome icons (free version)-->
-  <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <title>Ronnie Phillips — Product Leader · Frontier AI · Retail</title>
+  <meta name="description" content="Ronnie Phillips. Product Owner at Carter's Inc. Leading multi-discipline retail technology — frontier AI, mobile, and the platform behind it." />
 
-  <link href="static/css/aos.css" rel="stylesheet">
-  <!-- <link href="static/css/bootstrap.min.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link href="static/css/main.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0c0a08;
+      --bg-1:      #110e0c;
+      --bg-2:      #161310;
+      --bg-elev:   #1a1612;
+      --line:      #221e1a;
+      --line-2:    #2e2924;
+
+      --fg:        #ece7df;
+      --fg-2:      #a39c91;
+      --fg-3:      #6b665d;
+      --fg-4:      #3d3a35;
+
+      /* Primary signal */
+      --ember:     #d97757;
+      --ember-2:   #b85e3f;
+      --ember-soft:rgba(217, 119, 87, 0.10);
+
+      /* Secondary palette — autumn family, all desaturated */
+      --gold:      #c9a36a;     /* AWS */
+      --amber:     #d4b265;     /* muted yellow — Mobile/Retail */
+      --rose:      #c08a8a;     /* dusty pink — Analytics */
+      --moss:      #7a8c5a;     /* Product/Delivery */
+      --rust:      #a85432;     /* Languages */
+      --slate:     #6b7480;     /* counterweight */
+
+      --max:       1200px;
+      --gutter:    clamp(20px, 4vw, 44px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: "ss01", "cv11";
+      letter-spacing: -0.005em;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       AMBIENT — scroll-reactive background layer
+       ============================================ */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(var(--fg-4) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, black 0%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, black 0%, transparent 90%);
+      opacity: calc(0.5 - var(--scroll, 0) * 0.4);
+      transform: translateY(calc(var(--scroll, 0) * -40px));
+      transition: opacity 0.4s ease;
+    }
+    .ambient::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 0%, var(--ember-soft) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 30%, rgba(122, 140, 90, 0.04) 0%, transparent 70%);
+      opacity: calc(1 - var(--scroll, 0) * 0.5);
+      transition: opacity 0.4s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+
+    /* ============================================
+       NAV
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(12, 10, 8, 0.78);
+      backdrop-filter: blur(16px) saturate(120%);
+      -webkit-backdrop-filter: blur(16px) saturate(120%);
+      border-bottom-color: var(--line);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--fg);
+    }
+    .nav-brand .glyph {
+      width: 18px; height: 18px;
+      display: inline-block;
+      position: relative;
+    }
+    .nav-brand .glyph::before,
+    .nav-brand .glyph::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--ember);
+    }
+    .nav-brand .glyph::after {
+      transform: rotate(45deg) scale(0.7);
+      border-color: var(--fg);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--fg-3);
+      padding: 7px 12px;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+    }
+    .nav-links a .num { color: var(--fg-4); font-size: 10px; }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover .num { color: var(--ember); }
+    @media (max-width: 760px) { .nav-links { display: none; } }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 130px var(--gutter) 80px;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 110px; padding-bottom: 60px; }
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 40px;
+    }
+    .meta-row > span { display: flex; align-items: center; gap: 8px; }
+    .meta-row .label { color: var(--fg-4); }
+    .pulse {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ember);
+      box-shadow: 0 0 0 0 var(--ember);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.5); }
+      50% { box-shadow: 0 0 0 6px rgba(217, 119, 87, 0); }
+    }
+
+    h1.headline {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: clamp(40px, 5.4vw, 76px);
+      line-height: 1.0;
+      letter-spacing: -0.038em;
+      margin-bottom: 28px;
+      color: var(--fg);
+      max-width: 16ch;
+    }
+    h1.headline .ember { color: var(--ember); }
+    h1.headline .dim { color: var(--fg-3); font-weight: 400; }
+
+    .lede {
+      font-size: clamp(15px, 1.4vw, 18px);
+      line-height: 1.55;
+      max-width: 56ch;
+      color: var(--fg-2);
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .lede strong { color: var(--fg); font-weight: 500; }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 11px 16px;
+      border: 1px solid var(--line-2);
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0;
+    }
+    .btn:hover {
+      background: var(--bg-1);
+      border-color: var(--fg-3);
+    }
+    .btn.primary {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+    .btn.primary:hover {
+      background: var(--ember);
+      border-color: var(--ember);
+      color: var(--bg);
+    }
+    .btn.icon-only {
+      padding: 11px;
+      width: 38px;
+      height: 38px;
+      justify-content: center;
+    }
+    .btn svg { width: 12px; height: 12px; }
+    .btn.icon-only svg { width: 14px; height: 14px; }
+
+    /* PORTRAIT */
+    .portrait-wrap {
+      justify-self: end;
+      max-width: 280px;
+      width: 100%;
+    }
+    .portrait-frame {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border: 1px solid var(--line-2);
+      overflow: hidden;
+      background: var(--bg-elev);
+    }
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 55% 30%;
+      filter: saturate(0.75) contrast(1.08) brightness(0.95);
+      transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portrait-frame:hover img {
+      filter: saturate(0.95) contrast(1.02) brightness(1);
+      transform: scale(1.04);
+    }
+    .portrait-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(12,10,8,0) 50%, rgba(12,10,8,0.65) 100%);
+      pointer-events: none;
+    }
+    .portrait-corners::before,
+    .portrait-corners::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 1px solid var(--ember);
+      z-index: 3;
+    }
+    .portrait-corners::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+    .portrait-corners::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+    .portrait-caption {
+      margin-top: 12px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+    .portrait-caption .pos { color: var(--fg); }
+    .portrait-caption .ember { color: var(--ember); }
+    @media (max-width: 920px) {
+      .portrait-wrap { justify-self: start; max-width: 220px; }
+    }
+
+    /* STAT STRIP */
+    .stat-strip {
+      grid-column: 1 / -1;
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .stat {
+      padding: 20px 20px 20px 0;
+      border-right: 1px solid var(--line);
+    }
+    .stat:last-child { border-right: none; padding-right: 0; }
+    .stat-num {
+      font-family: 'Geist Mono', monospace;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .stat-num .ember { color: var(--ember); }
+    .stat-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg-3);
+    }
+    @media (max-width: 720px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: none; padding-right: 0; }
+      .stat:nth-child(odd) { border-right: 1px solid var(--line); padding-right: 20px; }
+      .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+    }
+
+    /* ============================================
+       SECTION SCAFFOLDING — alternating + delineated
+       ============================================ */
+    .panel {
+      position: relative;
+      z-index: 1;
+    }
+    .panel.elev {
+      background: var(--bg-1);
+    }
+    /* delineation: 1px hairline that draws in when panel enters viewport */
+    .panel + .panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: min(var(--max), 100% - 2 * var(--gutter));
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--line-2) 20%,
+        var(--ember) 50%,
+        var(--line-2) 80%,
+        transparent 100%);
+      transform-origin: center;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .panel + .panel.in-view::before {
+      transform: translateX(-50%) scaleX(1);
+    }
+    .panel.elev::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 50% 0%, var(--ember-soft) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px var(--gutter);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+      align-items: baseline;
+      position: relative;
+    }
+    /* Scanline shimmer that fires once when the section header enters view */
+    .section-head::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(217, 119, 87, 0) 30%,
+        rgba(217, 119, 87, 0.6) 50%,
+        rgba(217, 119, 87, 0) 70%,
+        transparent 100%);
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .section-head.in-view::after {
+      animation: scanline 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    @keyframes scanline {
+      0% { transform: translateX(-100%); opacity: 0; }
+      30% { opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+    .section-tag {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-tag::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--ember);
+    }
+    .section-title {
+      font-family: 'Geist', sans-serif;
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      max-width: 22ch;
+      color: var(--fg);
+    }
+    .section-title .dim { color: var(--fg-3); font-weight: 400; }
+    @media (max-width: 720px) {
+      .section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px; }
+    }
+
+    /* ============================================
+       ABOUT
+       ============================================ */
+    .about {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+    }
+    .about-side {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg-3);
+    }
+    .about-side dl { display: grid; gap: 16px; }
+    .about-side dt { color: var(--fg-4); margin-bottom: 3px; font-size: 10px; }
+    .about-side dd {
+      color: var(--fg-2);
+      text-transform: none;
+      letter-spacing: 0;
+      font-family: 'Geist', sans-serif;
+      font-size: 13px;
+    }
+    .about-prose { max-width: 64ch; }
+    .about-prose p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--fg);
+      margin-bottom: 18px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .about-prose p + p {
+      font-size: 15px;
+      color: var(--fg-2);
+      line-height: 1.65;
+    }
+    .about-prose strong { color: var(--fg); font-weight: 500; }
+    .about-prose .ember { color: var(--ember); }
+    @media (max-width: 720px) {
+      .about { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       SHIPPED — featured products with hover effect
+       ============================================ */
+    .shipped-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .shipped {
+      padding: 32px 28px;
+      border-right: 1px solid var(--line);
+      position: relative;
+      transition: background 0.4s ease;
+      overflow: hidden;
+    }
+    .shipped:last-child { border-right: none; }
+    /* Diagonal noise shimmer on hover — gives weight without chrome */
+    .shipped::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg,
+          transparent 0%,
+          var(--ember-soft) 40%,
+          transparent 80%);
+      transform: translateX(-100%);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .shipped:hover::before { transform: translateX(100%); }
+    .shipped:hover { background: var(--bg-2); }
+    .shipped > * { position: relative; z-index: 1; }
+    .shipped-tag {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ember);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .shipped-tag::before {
+      content: "";
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--ember);
+    }
+    .shipped-name {
+      font-family: 'Geist', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      color: var(--fg);
+    }
+    .shipped-desc {
+      font-size: 13px;
+      color: var(--fg-2);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .shipped-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    @media (max-width: 880px) {
+      .shipped-grid { grid-template-columns: 1fr; }
+      .shipped { border-right: none; border-bottom: 1px solid var(--line); }
+      .shipped:last-child { border-bottom: none; }
+    }
+
+    /* ============================================
+       EXPERIENCE
+       ============================================ */
+    .exp-list { border-top: 1px solid var(--line); }
+    .exp {
+      display: grid;
+      grid-template-columns: 200px 1fr 160px;
+      gap: 40px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .exp-co {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg-3);
+    }
+    .exp-co .name {
+      color: var(--ember);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      letter-spacing: 0.06em;
+    }
+    .exp-role {
+      font-family: 'Geist', sans-serif;
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      color: var(--fg);
+    }
+    .exp-desc {
+      color: var(--fg-2);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 60ch;
+      margin-bottom: 10px;
+    }
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .exp-tags .pri { color: var(--ember); }
+    .exp-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .exp-meta-row + .exp-meta-row { margin-top: 4px; }
+    .exp-meta-row .key { color: var(--fg-4); }
+    .exp.current .exp-co .name::after {
+      content: "";
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ember);
+      margin-left: 8px;
+      vertical-align: middle;
+      animation: pulse 2s infinite;
+    }
+    @media (max-width: 880px) {
+      .exp { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
+    }
+
+    /* ============================================
+       STACK
+       ============================================ */
+    .stack-table { border-top: 1px solid var(--line); }
+    .stack-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .stack-cat {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg-3);
+    }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 11px;
+      border: 1px solid var(--line);
+      background: var(--bg-1);
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-2);
+      transition: all 0.15s ease;
+      cursor: default;
+    }
+    .tool:hover {
+      border-color: var(--line-2);
+      color: var(--fg);
+      transform: translateY(-1px);
+    }
+    .tool svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+    .stack-row.featured .stack-cat { color: var(--ember); }
+    .stack-row.featured .stack-cat::after {
+      content: "";
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--ember);
+      margin-left: 8px;
+      vertical-align: middle;
+      animation: pulse 2s infinite;
+    }
+    .stack-row.featured .tool {
+      border-color: var(--ember-soft);
+      background: var(--ember-soft);
+    }
+    .stack-row.featured .tool:hover {
+      border-color: var(--ember);
+      color: var(--fg);
+    }
+    /* secondary featured — for Mobile/Retail (amber) */
+    .stack-row.secondary .stack-cat { color: var(--amber); }
+    .stack-row.secondary .stack-cat::after {
+      content: "";
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .stack-row.secondary .tool {
+      border-color: rgba(212, 178, 101, 0.18);
+      background: rgba(212, 178, 101, 0.06);
+    }
+    .stack-row.secondary .tool:hover {
+      border-color: var(--amber);
+      color: var(--fg);
+    }
+    @media (max-width: 720px) {
+      .stack-row { grid-template-columns: 1fr; gap: 12px; }
+    }
+
+    /* ============================================
+       CREDENTIALS
+       ============================================ */
+    .creds-block {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .creds-img {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      padding: 20px;
+      position: relative;
+    }
+    .creds-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .creds-img-label {
+      position: absolute;
+      top: -8px;
+      left: 14px;
+      background: var(--bg-1);
+      padding: 0 8px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-3);
+    }
+    .creds-text h3 {
+      font-family: 'Geist', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      color: var(--fg);
+    }
+    .creds-text h3 .ember { color: var(--ember); }
+    .creds-text p {
+      color: var(--fg-2);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .creds-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .creds-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--fg);
+    }
+    .creds-list .level {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ember);
+      min-width: 56px;
+    }
+    @media (max-width: 880px) {
+      .creds-block { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ============================================
+       PROJECTS
+       ============================================ */
+    .projects { border-top: 1px solid var(--line); }
+    .project {
+      display: grid;
+      grid-template-columns: 50px 1fr 160px 50px;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+      transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      cursor: pointer;
+    }
+    .project::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--ember);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project:hover::before { transform: scaleY(0.7); }
+    .project:hover { padding-left: 14px; }
+    .project:hover .proj-title { color: var(--ember); }
+    .project:hover .proj-arrow {
+      transform: translate(4px, -4px);
+      color: var(--ember);
+    }
+    .proj-num {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-3);
+    }
+    .proj-body { min-width: 0; }
+    .proj-title {
+      font-family: 'Geist', sans-serif;
+      font-size: clamp(18px, 1.8vw, 22px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      color: var(--fg);
+      transition: color 0.2s ease;
+    }
+    .proj-title .new {
+      display: inline-block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--ember);
+      border: 1px solid var(--ember);
+      padding: 2px 7px;
+      vertical-align: middle;
+      margin-left: 8px;
+      text-transform: uppercase;
+      transform: translateY(-2px);
+    }
+    .proj-desc {
+      color: var(--fg-2);
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 56ch;
+      margin-bottom: 10px;
+    }
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .proj-tags .pri { color: var(--ember); }
+    .proj-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .proj-meta-row + .proj-meta-row { margin-top: 4px; }
+    .proj-meta-row .key { color: var(--fg-4); }
+    .proj-arrow {
+      color: var(--fg-3);
+      font-size: 16px;
+      text-align: right;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+    }
+    @media (max-width: 880px) {
+      .project { grid-template-columns: 32px 1fr; gap: 16px; }
+      .proj-meta, .proj-arrow { display: none; }
+    }
+
+    /* ============================================
+       TIMELINE
+       ============================================ */
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .tl-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      gap: 40px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .tl-year {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      color: var(--ember);
+      letter-spacing: 0.05em;
+    }
+    .tl-year .label {
+      color: var(--fg-4);
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 4px;
+    }
+    .tl-title {
+      font-family: 'Geist', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin-bottom: 4px;
+      color: var(--fg);
+    }
+    .tl-org {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .tl-desc {
+      color: var(--fg-2);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .tl-cert-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+    .tl-cert-list li {
+      font-size: 13px;
+      color: var(--fg-2);
+      padding: 3px 0;
+    }
+    .tl-cert-list li::before {
+      content: "—";
+      color: var(--ember);
+      margin-right: 8px;
+    }
+    .tl-row.combined {
+      grid-template-columns: 200px 1fr;
+    }
+    .tl-row.combined .tl-orgs {
+      display: grid;
+      gap: 16px;
+    }
+    .tl-row.combined .tl-org-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: baseline;
+    }
+    @media (max-width: 880px) {
+      .tl-row, .tl-row.combined { grid-template-columns: 1fr; gap: 12px; }
+      .tl-row.combined .tl-org-block { grid-template-columns: 1fr; gap: 4px; }
+    }
+
+    /* ============================================
+       CONTACT
+       ============================================ */
+    .contact {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px var(--gutter) 80px;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-headline {
+      font-family: 'Geist', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      margin-bottom: 24px;
+      max-width: 16ch;
+      color: var(--fg);
+    }
+    .contact-headline .ember { color: var(--ember); }
+    .contact-headline .dim { color: var(--fg-3); font-weight: 400; }
+    .contact-sub {
+      font-size: 16px;
+      color: var(--fg-2);
+      max-width: 50ch;
+      margin-bottom: 32px;
+      line-height: 1.55;
+    }
+    .contact-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      border-top: 1px solid var(--line);
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      position: relative;
+      z-index: 1;
+    }
+    footer .commit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    footer .build { color: var(--fg-4); }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::selection { background: var(--ember); color: var(--bg); }
+    a:focus-visible, button:focus-visible {
+      outline: 1px solid var(--ember);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .ambient::before, .ambient::after { transform: none !important; }
+    }
+  </style>
 </head>
-
 <body id="top">
-  <header>
-    <div class="profile-page sidebar-collapse">
-      <nav class="navbar navbar-expand-lg fixed-top navbar-transparent bg-primary" color-on-scroll="400">
-        <div class="container">
-          <div class="navbar-translate"><a class="navbar-brand" href="#" rel="tooltip">Ronnie Phillips</a>
-            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-              aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span
-                class="navbar-toggler-bar bar3"></span></button>
-          </div>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">Skills</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#education">Education</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#projects">Projects</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <!-- ICON SYMBOL DEFS -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+      </symbol>
+      <symbol id="i-claude" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 8a3 3 0 0 1 3-3h2v14H8a3 3 0 0 1-3-3V8z"/>
+        <path d="M14 5h2a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-2V5z"/>
+      </symbol>
+      <symbol id="i-gemini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/>
+      </symbol>
+      <symbol id="i-mcp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12l4-5h4M21 12l-4 5h-4M11 7v10M13 7v10"/>
+        <circle cx="3" cy="12" r="1.5"/><circle cx="21" cy="12" r="1.5"/>
+      </symbol>
+      <symbol id="i-net" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="4" r="2"/>
+        <circle cx="4" cy="20" r="2"/>
+        <circle cx="20" cy="20" r="2"/>
+        <circle cx="12" cy="12" r="2"/>
+        <path d="M12 6v4M11 13l-6 5M13 13l6 5"/>
+      </symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l9 5-9 5-9-5z"/>
+        <path d="M3 13l9 5 9-5M3 17l9 5 9-5"/>
+      </symbol>
+      <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17a4 4 0 0 1-1-7.9 6 6 0 0 1 11.5-1.4A4.5 4.5 0 0 1 17.5 17H7z"/>
+      </symbol>
+      <symbol id="i-pipe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="6" width="6" height="6" rx="1"/>
+        <rect x="15" y="12" width="6" height="6" rx="1"/>
+        <path d="M9 9h6v6"/>
+      </symbol>
+      <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <rect x="3" y="4" width="18" height="6" rx="1"/>
+        <rect x="3" y="14" width="18" height="6" rx="1"/>
+        <circle cx="7" cy="7" r="0.5" fill="currentColor"/>
+        <circle cx="7" cy="17" r="0.5" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <ellipse cx="12" cy="5" rx="8" ry="2.5"/>
+        <path d="M4 5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5V5"/>
+        <path d="M4 11v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/>
+      </symbol>
+      <symbol id="i-sigma" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 5H6l6 7-6 7h12"/>
+      </symbol>
+      <symbol id="i-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="6" width="12" height="12" rx="1"/>
+        <rect x="9" y="9" width="6" height="6"/>
+        <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>
+      </symbol>
+      <symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>
+        <path d="M7 14h10"/>
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/>
+      </symbol>
+      <symbol id="i-graph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="6" cy="6" r="2"/>
+        <circle cx="18" cy="6" r="2"/>
+        <circle cx="6" cy="18" r="2"/>
+        <circle cx="18" cy="18" r="2"/>
+        <circle cx="12" cy="12" r="2"/>
+        <path d="M8 6h8M6 8v8M8 18h8M18 8v8"/>
+      </symbol>
+      <symbol id="i-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>
+      </symbol>
+      <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="6" height="14" rx="1"/>
+        <rect x="11" y="5" width="6" height="9" rx="1"/>
+        <rect x="19" y="5" width="2" height="6" rx="1"/>
+      </symbol>
+      <!-- Mobile / phone -->
+      <symbol id="i-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="2" width="12" height="20" rx="2"/>
+        <path d="M11 18h2"/>
+      </symbol>
+      <!-- Robot/Android-y -->
+      <symbol id="i-droid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="9" width="14" height="10" rx="2"/>
+        <path d="M8 9V6M16 9V6M9 14h0M15 14h0M3 12v3M21 12v3M9 19v2M15 19v2"/>
+      </symbol>
+      <!-- Box (apps/packages) -->
+      <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 8l-9-5-9 5 9 5 9-5z"/>
+        <path d="M3 8v8l9 5 9-5V8M12 13v8"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============= NAV ============= -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-brand">
+        <span class="glyph"></span>
+        <span>RONNIE PHILLIPS</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about"><span class="num">01</span> About</a></li>
+        <li><a href="#shipped"><span class="num">02</span> Shipped</a></li>
+        <li><a href="#experience"><span class="num">03</span> Experience</a></li>
+        <li><a href="#stack"><span class="num">04</span> Stack</a></li>
+        <li><a href="#credentials"><span class="num">05</span> Creds</a></li>
+        <li><a href="#work"><span class="num">06</span> Work</a></li>
+        <li><a href="#contact"><span class="num">07</span> Contact</a></li>
+      </ul>
     </div>
-  </header>
-  <div class="page-content">
+  </nav>
+
+  <!-- ============= HERO ============= -->
+  <header class="hero">
     <div>
-      <div class="profile-page">
-        <div class="wrapper">
-          <div class="page-header page-header-small" filter-color="green">
-            <div class="page-header-image" data-parallax="true"
-              style="background-image: url('static/images/background.jpg');"></div>
-            <div class="container">
-              <div class="content-center">
-                <div class="cc-profile-image"><a href="https://www.linkedin.com/in/ronniephillips-ii/"><img
-                      src="https://avatars.githubusercontent.com/u/101227638?s=400&u=8fbaf50c85e8e298e550acac6dbb1dd589709c29&v=4" alt="Image" /></a></div>
-                <div class="h2 title">Ronnie Phillips</div>
-                <p class="category text-white">Results Driven | Customer Focused
-                </p>
-                <!-- <a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in"
-                  data-aos-anchor="data-aos-anchor">Hire Me</a> -->
+      <div class="meta-row">
+        <span><span class="pulse"></span> SHIPPING FRONTIER AI · CARTER'S</span>
+        <span><span class="label">LOC</span> ATLANTA, GA</span>
+        <span><span class="label">TRACK</span> AI · MOBILE · PRODUCT</span>
+      </div>
 
-              </div>
-            </div>
-            <div class="section">
-              <div class="container">
-                <div class="button-container">
-                  <a class="btn btn-default btn-round btn-lg btn-icon" href="https://www.linkedin.com/in/ronniephillips-ii/"
-                    rel="tooltip" title="Connect on LinkedIn"><i class="fab fa-linkedin-in fa-3x"
-                      style="padding-top: 20%;"></i></a>
-                  <a class="btn btn-default btn-round btn-lg btn-icon" href="https://github.com/GambitAcid"
-                    rel="tooltip" title="Check my work!"><i class="fab fa-github fa-3x"
-                      style="padding-top: 20%;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section" id="about">
-          <div class="container">
-            <div class="card" data-aos="fade-up" data-aos-offset="10">
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <div class="card-body">
-                    <div class="h4 mt-0 title">About</div>
-                    <p>Analytical, energetic, and result-driven analyst with an ever-broadening knowledge base in business and analytics. Experienced in 
-                      SQL database management, ETL, Python, Tableau, business intelligence, data visualization, EDA, and machine learning. Passionate 
-                      about improving processes and bringing a data driven mindset to all.</p>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="card-body">
-                    <div class="h4 mt-0 title">Basic Information</div>
-                    <div class="row">
-                      <div class="col-sm-4"><strong class="text-uppercase">City:</strong></div>
-                      <div class="col-sm-8">Atlanta, GA</div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
-                      <div class="col-sm-8"><a href="mailto:ronnieleephillips@yahoo.com">ronnieleephillips@yahoo.com</a></div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-sm-4"><strong class="text-uppercase">LinkedIn:</strong></div>
-                      <div class="col-sm-8"><a
-                          href="https://www.linkedin.com/in/ronniephillips-II/">https://www.linkedin.com/in/ronniephillips-II/</a>
-                      </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-sm-4"><strong class="text-uppercase">GitHub:</strong></div>
-                      <div class="col-sm-8"><a
-                          href="https://github.com/GambitAcid">https://github.com/GambitAcid</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section" id="skills">
-          <div class="container">
-            <div class="h4 text-center mb-4 title">Professional Skills</div>
-            <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">Python | Pandas |
-                        Numpy | R </span>
+      <h1 class="headline">
+        At the <span class="ember">frontier</span> <span class="dim">of agentic retail.</span>
+      </h1>
 
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">Machine Learning |
-                        Supervised | Unsupervised Learning</span>
+      <p class="lede">
+        I'm <strong>Ronnie Phillips</strong> — Product Owner at Carter's, leading a multi-discipline team that ships <strong>frontier AI</strong>, <strong>retail mobile apps</strong>, and the platform behind both. AskCarter, MCPO, and POD AI on the AI track; Kotlin and Android for the field associates we build for. Bread-and-butter is product management, Python, and SQL.
+      </p>
 
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">Web
-                        Scraping(BeautifulSoup/Selenium) | APIs (RESTful)</span>
-
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">Hadoop | Spark</span>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">Postgres | MongoDB |
-                        Microsoft SQL</span>
-
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">HTML | CSS |
-                        Bootstrap</span>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">Tableau & PowerBI|
-                        Dashboards</span>
-
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge">JavaScript |
-                        D3.js</span>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <ul class="list-inline dev-icons">
-              <li class="list-inline-item">
-                <i class="fab fa-python fa-5x"></i>
-                Python
-              </li>
-              <li class="list-inline-item">
-                <i class="fab fa-r-project fa-5x"></i>
-                R
-              </li>
-              <li class="list-inline-item">
-                <i class="fas fa-database fa-5x"></i>
-                Postgres
-              </li>
-              <li class="list-inline-item">
-                <i class="fab fa-html5 fa-5x"></i>
-                HTML
-              </li>
-              <li class="list-inline-item">
-                <i class="fab fa-css3-alt fa-5x"></i>
-                CSS
-              </li>
-              <li class="list-inline-item">
-                <i class="fab fa-js fa-5x"></i>
-                JavaScript
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="section" id="education">
-          <div class="container cc-education">
-            <div class="h4 text-center mb-4 title">Education</div>
-            <div class="card">
-              <div class="row">
-                <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body cc-education-header">
-                    <p>2022</p>
-                    <div class="h5">Certification</div>
-                  </div>
-                </div>
-                <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body">
-                    <div class="h5">Data Science and Analytics Boot Camp</div>
-                    <h6 style="color: darkgrey;">Georgia Institute Of Technology, Atlanta, GA</h6>
-                    <p>Advanced Excel, Fundamental Statistics, Python Programming, API Interactions, Data Mining, Web
-                      scraping, Databases - Postgres, MongoDB, Front-End Web Visualization - HTML, CSS, Bootstrap,
-                      Dashboarding, JavaScript, D3.js, Geomapping with Leaflet.js, Business Intelligence Software -
-                      Tableau, Big Data Analytics with Hadoop, Machine Learning, and Deep Learning.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="row">
-                <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body cc-education-header">
-                    <p>2019</p>
-                    <div class="h5">Master's Degree</div>
-                  </div>
-                </div>
-                <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body">
-                    <div class="h5">M.S - Applied And Environmental Microbiology</div>
-                    <h6 style="color: darkgrey;">Georgia State University, Atlanta, GA</h6>
-                    <p>Biotechnology & Bioinformatics, Bioethics, Biochemistry, Endocrinology, Microbial Pathogenesis,
-                        Advanced Genetics, Molecular Neuroscience, Cell Physiology, Immunology, Virology
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="row">
-                <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body cc-education-header">
-                    <p>2016</p>
-                    <div class="h5">Bachelor's Degree</div>
-                  </div>
-                </div>
-                <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body">
-                    <div class="h5">B.S - Biology Minor in Chemistry</div>
-                    <h6 style="color: darkgrey;">Clayton State University, Morrow, GA</h6>
-                    <p>Advanced Cellular Biology, Bioinformatics, Biochemistry, Pathophysiology, Microbiology, 
-                      Organic Chemistry, Physical Chemsitry, Physics, and Genetic Transformation.
-                      Demonstrated proficiency in utilizing laboratory instruments for a wide array of experiments, including: gene cloning, 
-                      DNA isolation, PCR, Southern Blotting, ELISA, SDS PAGE, Western Blotting, electrophoresis, restriction digestion, preparing
-                      and loading gels, and gene detection for sickle cell anemia.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-            <div class="section" id="experience">
-              <div class="container cc-experience">
-                <div class="h4 text-center mb-4 title">Projects</div>
-
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                      style="background-image: url('static/images/deeplearning.png'); background-size: cover; background-repeat: no-repeat center center-fixed; overflow: hidden">
-                      <div class="card-body">
-                      </div>
-                    </div>
-                    <div class="col-md-8" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                      <div class="card-body">
-                        <div class="h5">
-                          <a href="https://github.com/GambitAcid/Alphabet-Soup-Charity-Funding-Tool"
-                            style="font-weight: 600">
-                            Deep Learning with Alphabet Soup: a Charity Funding Tool
-                          </a>
-                        </div>
-                        <p>This project utilizes neural networks and deep learning to predict whether applicants will be
-                          successful if funded by the nonprofit, Alphabet Soup, based on data from over 34,000
-                          organizations. </p>
-                        <p><strong>Tools Used:</strong> &nbsp: &nbsp Neural Network, Tensorflow, Keras</p>
-                        <p><strong> Category</strong> &nbsp &nbsp : &nbsp Deep Learning, Machine Learning</p>
-                        <p><strong> Year</strong> &nbsp &nbsp : &nbsp August 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card ">
-                  <div class="row ">
-                    <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                    style="background-image: url(
-                    'static/images/Belly.png'); background-size: cover; background-repeat: no-repeat ">
-                      <div class="card-body">
-                      </div>
-                    </div>
-                    <div class="col-md-8 " data-aos="fade-left" data-aos-offset="50" data-aos-duration="500 ">
-                      <div class="card-body ">
-                        <div class="h5 ">
-                          <a href="https://github.com/GambitAcid/Belly-Button-Biodiversity-Plot.ly-" style="font-weight: 600">
-                            Exploring Human Belly Button Biodiversity
-
-                          </a>
-                        </div>
-                        <p> This project uses Javascript, Plotly and D3 to build an interactive dashboard exploring and
-                          analyzing belly button microbial diversity. The dashboard dynamically populates based on test
-                          subject ID
-                          selected.
-                        </p>
-                        </h6>
-                        <p><strong> Tools used</strong> &nbsp : &nbsp Javascript, D3, Plotly, JSON, HTML, Bootstrap, CSS
-                        </p>
-                        <p><strong> Category</strong> &nbsp: &nbsp Statistics, Correlation, Data Visualization, EDA</p>
-                        <p><strong> Year</strong> &nbsp &nbsp : &nbsp June 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card ">
-                  <div class="row ">
-                    <div class="col-md-4 bg-primary " data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                      style="background-image: url('static/images/Picture2.jpg'); background-size: cover; background-repeat: no-repeat ">
-                      <div class="card-body ">
-                      </div>
-                    </div>
-                    <div class="col-md-8 " data-aos="fade-left" data-aos-offset="50" data-aos-duration="500 ">
-                      <div class="card-body ">
-                        <div class="h5 ">
-                          <a href="https://github.com/GambitAcid/Tegridy-Farms-an-Explicitive-South-Park-Sentiment-Analysis-" style="font-weight: 600">
-                            South Park Tegridy Farms: an Explicitive Sentiment Analysis
-                          </a>
-                        </div>
-                        <p> This project I examine and measure the entire dialogue of the show South Park in terms of offensiveness, the use of offensive language,
-                          to visualize if the amount of offensive language and content has decreased over the run of the series.
-                        </p>
-                        </h6>
-                        <p><strong> Tools used</strong> &nbsp : &nbsp Python, Pandas, NLTK Tokenizer, TextBlob Sentiment Analysis, Matplotlib, StopWords, WordCloud, 
-                          and Punctuation Lists/p>
-                        <p><strong> Category</strong> &nbsp: &nbsp Python, Pandas, Tokenizer, Sentiment Analysis</p>
-                        <p><strong> Year</strong> &nbsp &nbsp : &nbsp June 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                      style="background-image: url('static/images/earthquake.png'); background-size: cover; background-repeat: no-repeat center center-fixed; overflow: hidden">
-                      <div class="card-body">
-                      </div>
-                    </div>
-                    <div class="col-md-8" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                      <div class="card-body">
-                        <div class="h5">
-                          <a href="https://github.com/GambitAcid/United-States-Geological-Survey-Earthquakes-Leaflet" style="font-weight: 600">
-                            United States Geological Survey Earthquake Visualization
-                          </a>
-                        </div>
-                        <p>The United States Geological Survey (USGS) is responsible for providing scientific data about
-                          natural hazards, the health of our ecosystems and environment; and the impacts of climate and
-                          land-use change. Their scientists develop new methods and tools to supply timely, relevant,
-                          and useful information about the Earth and its processes. This project combines the USGS
-                          earthquake data into a new visualize tool their
-                          earthquake data which allows them to better educate the public and other government
-                          organizations on issues facing our planet and hopefully secure
-                          more funding.</p>
-                        <p><strong> Tools Used:</strong>D3, HTML, Leaflet.js</p>
-                        <p><strong> Category</strong> &nbsp: &nbsp : Data Visualizaton, JavaScript, API, Maps</p>
-                        <p><strong> Year</strong> &nbsp: &nbsp : July 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                      style="background-image: url('static/images/map.jpg'); background-size: cover; background-repeat: no-repeat center center-fixed; overflow: hidden">
-                      <div class="card-body">
-                      </div>
-                    </div>
-                    <div class="col-md-8" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                      <div class="card-body">
-                        <div class="h5">
-                          <a href="https://github.com/GambitAcid/Analyzing-Gun-Violence-and-Control-in-America" style="font-weight: 600">
-                            Analyzing Gun Violence and Control in America
-                                                      </a>
-                        </div>
-                        <p style=" font-style: italic; "> Considering recent events, we endeavored to take a closer look at gun violence in America. Our hope was to identify
-                          trends which if we are lucky might point to some root causes though a look at commonality among incidents. We hope our research can help others find 
-                          a path that will lead to a solution. where multiple maps update from data that is stored
-                          in PostgreSQL. The project is powered by a Python Flask API.
-                        </p>
-                        </h6>
-                        <p><strong> Tools used</strong> &nbsp : &nbsp Python, SQLAlchemy, PostgreSQL, Javascript (D3.js,
-                          Chart.js, Leaflet.js), HTML/CSS/Bootstrap, Flask</p>
-                        <p><strong> Category</strong> &nbsp: &nbsp Web Application, Deployment, ETL, Full Stack
-                          Development, Teamwork</p>
-                        <p><strong> Year</strong> &nbsp &nbsp : &nbsp August 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                      style="background-image: url('static/images/citibike.png'); background-size: cover; background-repeat: no-repeat center center-fixed; overflow: hidden">
-                      <div class="card-body">
-                      </div>
-                    </div>
-                    <div class="col-md-8" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                      <div class="card-body">
-                        <div class="h5">
-                          <a href="https://public.tableau.com/views/CitiBikeAnalytics_16347828879730/RideDashboard?:language=en-US&:display_count=n&:origin=viz_share_link"
-                            style="font-weight: 600">
-                            NYC Citi Bike Tableau Visualization
-                          </a>
-                        </div>
-                        <p style=" font-style: italic; "> Generated a official dashboard by utilizing Tableau. By combining multiple years of data from Citi Bike's websites
-                          I was able to visualize multiple different phenomena and answer many questions city officials, public administrators, and heads of New York City 
-                          municipal departments had regarding the program including: popular star/stop routes, age, gender,
-                          social status, duration, peak hours and rental times versus monthly subscribers. This project utilizes Tableau to display the advantages data
-                          visualizaitons has on telling a story.</p>
-                        </h6>
-                        <p><strong> Tools used</strong> &nbsp : &nbsp Tableau</p>
-                        <p><strong> Category</strong> &nbsp: &nbsp Data Visualization</p>
-                        <p><strong> Year</strong> &nbsp &nbsp : &nbsp October 2021</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                      style="background-image: url('static/images/supervised.png'); background-size: cover; background-repeat: no-repeat center center-fixed; overflow: hidden">
-                      <div class="card-body">
-                      </div>
-                    </div>
-                    <div class="col-md-8" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                      <div class="card-body">
-                        <div class="h5">
-                          <a href="https://github.com/GambitAcid/Predicting-Credit-Risk-with-Supervised-Machine-Learning" style="font-weight: 600">
-                            Predicting Credit Risk with Supervised Machine Learning
-                          </a>
-                        </div>
-                        <p>Machine Learning automates model building, leading us to the creation of systems that can
-                          identify patterns, make decisions, and learn without much human intervention. It's an exciting
-                          realization in the growth of artificial intelligence as a computer learns from previous
-                          computations and produces reliable and repeatable results. I built a machine learning model
-                          that
-                          attempts to predict whether a loan
-                          from LendingClub is high risk or not. LendingClub is a peer-to-peer lending services company
-                          that allows individual investors to partially fund personal loans as well as buy and sell
-                          notes
-                          backing the loans on a secondary market. LendingClub offers their previous data through an
-                          API.
-                          I used this data to create machine learning models to classify the risk level of given loans.
-                          Specifically, I compared the Logistic Regression model and Random Forest Classifier.</p>
-                        </h6>
-                        <p><strong> Tools used</strong> &nbsp : &nbsp Python, Supervised Machine Learning, Logistic
-                          Regression, Random Forest Regression</p>
-                        <p><strong> Category</strong> &nbsp: &nbsp Machine Learning</p>
-                        <p><strong> Year</strong> &nbsp &nbsp : &nbsp August 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="row">
-                  <div class="col-md-4 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                    style="background-image: url('static/images/unsupervised.png'); background-size: cover; background-repeat: no-repeat center center-fixed; overflow: hidden">
-                    <div class="card-body">
-                    </div>
-                  </div>
-                  <div class="col-md-8" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                    <div class="card-body">
-                      <div class="h5">
-                        <a href="https://github.com/GambitAcid/Unsupervised-Learning-with-Myopia"
-                          style="font-weight: 600">
-                          Unsupervised Machine Learning with Myopia
-                        </a>
-                      </div>
-                      <p>This project used unsupervised machine learning to create a report where I prepared the data by removing columns, dropping null values, creating a scalar, 
-                        and trained the scalar on the data. In part two, I applied the Dimensionality Reduction using PCA and then took it a step further and was able to 
-                        reduce even more with t-SNE. Lastly, I did a Cluster Analysis with a K-Means model. It seems the best number of clusters is 3. I found that t-SNE 
-                        wasnt helpful in finding clusters although after adjusting perplexity there was neglible differences. The dataset may be too small to make a precise
-                        prediction as noted after looking a patterns after the K-Means analysis. I recommend a larger set of data then splitting the data into testing and 
-                        training data to these models for more accurate clustering and results. </p>
-                      </h6>
-                      <p><strong> Tools used</strong> &nbsp : &nbsp Python, Unsupervised Machine Learning, Dimensionality Reduction, KMeans, TSNE
-                      </p>
-                      <p><strong> Category</strong> &nbsp: &nbsp Machine Learning</p>
-                      <p><strong> Year</strong> &nbsp &nbsp : &nbsp July 2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="row">
-                <div class="col-md-4 bg-primary " data-aos="fade-right" data-aos-offset="50" data-aos-duration="500"
-                  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjTVvvgtJ1LARKgJrPu-BZ6HPxwVpCGeSJ_A&usqp=CAU'); background-size: cover; background-repeat: no-repeat ">
-                  <div class="card-body ">
-                  </div>
-                </div>
-                <div class="col-md-8 " data-aos="fade-left" data-aos-offset="50" data-aos-duration="500 ">
-                  <div class="card-body ">
-                    <div class="h5 ">
-                      <a href="https://github.com/GambitAcid/NASA-and-Mars-Web-Scraping" style="font-weight: 600">
-                        NASA and Mars Web Scraping App
-                      </a>
-                    </div>
-                    <p> This project builds a web application that scrapes NASA websites for data related to the
-                      Mission to Mars and displays the information in a single HTML page. MongoDB is used with Flask
-                      to
-                      deploy
-                      results to an HTML page.</p>
-
-                    </h6>
-                    <p><strong> Tools used</strong> &nbsp : &nbsp Beautiful Soup, Pandas, Splinter, MongoDB, Flask,
-                      Bootstrap, HTML/CSS</p>
-                    <p><strong> Category</strong> &nbsp: &nbsp Web Application, Deployment, Database, ETL</p>
-                    <p><strong> Year</strong> &nbsp &nbsp : &nbsp May 2022</p>
-
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="section" id="skill">
-              <div class="container">
-                <div class="h4 text-center mb-4 title">Certifications</div>
-                <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom" style="font-size: 130%;">
-                  <div class="card-body">
-                    <ul class="fa-ul mb-0">
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        Data Science and Analytics Boot Camp, Georgia Institute of Technology 2022
-                        <iframe src="https://GambitAcid.github.io/assets/resume/cert.pdf" style="height:1000px;width:100%;"
-                          title="Iframe Example"></iframe>
-                      </li>
-                      <!-- <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        Leadership Development Program (LDP), Center for Creative Leadership,
-                        Greenville,
-                        SC
-                        (2020)
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        ITIL V3 Foundation in IT Service Management (2015)
-                      </li>
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        VMware Certified Professional 5 - Data Center Virtualization (VCP5-DCV) (2013)
-                      </li>
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        VMware Certified Associate - Data Center Virtualization (VCA-DCV) (2013)
-                      </li>
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        MCSA: Windows Server 2012 (2013)
-                      </li>
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        MCSA: Windows Server 2008 (2013)
-                      </li>
-                      <li>
-                        <i class="fa-li fa fa-certificate text-warning"></i>
-                        MCSA: Windows 7 (2013)
-                      </li> -->
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            
-            <!-- <div class="section" id="contact">
-              <div class="cc-contact-information" style="background-image: url('static/images/background.jpg');">
-                <div class="container">
-                  <div class="cc-contact">
-                    <div class="row">
-                      <div class="col-md-9">
-                        <div class="card mb-0" data-aos="zoom-in">
-                          <div class="h4 text-center title">Contact Me</div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="card-body">
-                                <form action="https://formspree.io/meqrebwg" method="POST">
-                                  <div class="p pb-3"><strong>Feel free to contact me </strong></div>
-                                  <div class="row mb-3">
-                                    <div class="col">
-                                      <div class="input-group"><span class="input-group-addon"><i
-                                            class="fa fa-user-circle"></i></span>
-                                        <input class="form-control" type="text" name="name" placeholder="Name"
-                                          required="required" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <div class="col">
-                                      <div class="input-group"><span class="input-group-addon"><i
-                                            class="fas fa-file-alt"></i></span>
-                                        <input class="form-control" type="text" name="Subject" placeholder="Subject"
-                                          required="required" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <div class="col">
-                                      <div class="input-group"><span class="input-group-addon"><i
-                                            class="fa fa-envelope"></i></span>
-                                        <input class="form-control" type="email" name="_replyto" placeholder="E-mail"
-                                          required="required" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <div class="col">
-                                      <div class="form-group">
-                                        <textarea class="form-control" name="message" placeholder="Your Message"
-                                          required="required"></textarea>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col">
-                                      <button class="btn btn-primary" type="submit">Send</button>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="card-body">
-                                <p class="mb-0"><strong>Email</strong></p>
-                                <p>greyhardy7@gmail.com</p>
-                                <br>
-                                <p>
-                                  <a class="btn btn-default btn-round btn-lg btn-icon"
-                                    href="https://www.linkedin.com/in/greyhardy/" rel="tooltip"
-                                    title="Connect on LinkedIn"><i class="fab fa-linkedin fa-3x"
-                                      style="padding-top: 20%;"></i></a>
-                                  <a class="btn btn-default btn-round btn-lg btn-icon"
-                                    href="https://github.com/ItsGreyedOut" rel="tooltip" title="Check my work!"><i
-                                      class="fab fa-github fa-3x" style="padding-top: 20%;"></i></a>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="hero-actions">
+        <a href="#shipped" class="btn primary">
+          What I've shipped
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/ronniephillips-ii/" class="btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.78-1.75-1.74s.78-1.74 1.75-1.74 1.75.78 1.75 1.74c0 .96-.78 1.74-1.75 1.74zm13.5 12.27h-3v-5.34c0-1.27-.02-2.91-1.77-2.91-1.78 0-2.05 1.39-2.05 2.82v5.43h-3v-11h2.88v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6v6.46z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/GambitAcid" class="btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.13c-3.2.69-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18.92-.26 1.9-.39 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:ronnie.phillips@carters.com" class="btn icon-only" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
       </div>
     </div>
-  </div> -->
-  <iframe src="https://GambitAcid.github.io/assets/resume/testing.pdf" style="height:1000px;width:100%;"
-    title="Iframe Example"></iframe>
-  <footer class="footer">
-    <div class="container text-center">
-      <div class="h4 title text-center">Ronnie Phillips</div>
-      <a class="cc-github btn btn-link" href="https://github.com/GambitAcid"><i class="fab fa-github-square fa-3x "
-          aria-hidden="true"></i></a>
-      <a class="cc-linkedin btn btn-link " href="https://www.linkedin.com/in/ronniephillips-ii/"><i
-          class="fab fa-linkedin fa-3x " aria-hidden="true"></i></a>
 
+    <!-- PORTRAIT -->
+    <div class="portrait-wrap">
+      <div class="portrait-frame portrait-corners">
+        <img src="assets/portrait.png" alt="Ronnie Phillips" loading="eager">
+      </div>
+      <div class="portrait-caption">
+        <span class="pos">RONNIE PHILLIPS</span>
+        <span class="ember">PO · CARTER'S</span>
+      </div>
+    </div>
 
+    <!-- STATS -->
+    <div class="stat-strip">
+      <div class="stat">
+        <div class="stat-num"><span class="ember">3</span></div>
+        <div class="stat-label">AI Products Shipping</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">Scrum Alliance Certified</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2 YR</div>
+        <div class="stat-label">Lead Instructor · NU</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">F500</div>
+        <div class="stat-label">Production Scale</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============= ABOUT ============= -->
+  <div class="panel">
+    <section id="about">
+      <div class="section-head">
+        <div class="section-tag">01 / About</div>
+        <h2 class="section-title">Frontier AI in production. <span class="dim">A diverse engineering portfolio.</span></h2>
+      </div>
+      <div class="about">
+        <aside class="about-side">
+          <dl>
+            <div><dt>Role</dt><dd>Product Owner · Carter's Inc.</dd></div>
+            <div><dt>Team</dt><dd>AI · Mobile · Platform</dd></div>
+            <div><dt>Teaching</dt><dd>Northwestern · Georgia Tech</dd></div>
+            <div><dt>Based</dt><dd>Atlanta, GA</dd></div>
+          </dl>
+        </aside>
+        <div class="about-prose">
+          <p>I lead the AI most product orgs are still talking about — agents wired into legacy systems, retrieval grounded in operational data — alongside the Kotlin and Android apps the field actually uses every day.</p>
+          <p>My thesis: <strong>frontier capability only matters when it survives contact with production.</strong> That goes for the AGI-class work and the mobile experience an associate opens 200 times a shift. Bread-and-butter is product management, <span class="ember">Python, and SQL</span> — the rest is what I build with the team I lead.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= SHIPPED ============= -->
+  <div class="panel elev">
+    <section id="shipped">
+      <div class="section-head">
+        <div class="section-tag">02 / Shipped</div>
+        <h2 class="section-title">Three frontier products. <span class="dim">In production at Carter's.</span></h2>
+      </div>
+      <div class="shipped-grid">
+        <div class="shipped">
+          <div class="shipped-tag">LLM PLATFORM</div>
+          <div class="shipped-name">AskCarter</div>
+          <p class="shipped-desc">Internal LLM grounded in Carter's operational corpus. Retrieval-augmented, agentic, and built to give the org an AGI-class interface to its own data.</p>
+          <div class="shipped-meta">PRODUCTION · ENTERPRISE</div>
+        </div>
+        <div class="shipped">
+          <div class="shipped-tag">ORCHESTRATION</div>
+          <div class="shipped-name">MCPO</div>
+          <p class="shipped-desc">Model context and protocol orchestration layer. Connects frontier models to enterprise systems with the governance and observability production demands.</p>
+          <div class="shipped-meta">PRODUCTION · INFRA</div>
+        </div>
+        <div class="shipped">
+          <div class="shipped-tag">AGENT FABRIC</div>
+          <div class="shipped-name">POD AI</div>
+          <p class="shipped-desc">Agent system driving operational outcomes across the field — purpose-built to turn frontier capability into measurable retail performance.</p>
+          <div class="shipped-meta">PRODUCTION · OPS</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= EXPERIENCE ============= -->
+  <div class="panel">
+    <section id="experience">
+      <div class="section-head">
+        <div class="section-tag">03 / Experience</div>
+        <h2 class="section-title">Current roles. <span class="dim">Product, AI, classroom.</span></h2>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp current">
+          <div class="exp-co">
+            <span class="name">Carter's Inc.</span>
+            Full-time
+          </div>
+          <div>
+            <h3 class="exp-role">Product Owner — Field Tech, AI &amp; Mobile</h3>
+            <p class="exp-desc">Lead a multi-discipline team across the AI portfolio (AskCarter, MCPO, POD AI) and the Kotlin / Android apps that field associates use daily. Scope frontier capability into production, partner with eng + ops on agentic delivery, and own the roadmap for the apps that move retail performance.</p>
+            <div class="exp-tags">
+              <span class="pri">Frontier AI</span>
+              <span>Mobile · Android</span><span>Agents</span><span>Roadmap</span><span>Team Lead</span>
+            </div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-meta-row"><span class="key">Since</span> &nbsp; 2025</div>
+            <div class="exp-meta-row"><span class="key">Loc</span> &nbsp; Atlanta</div>
+          </div>
+        </div>
+
+        <div class="exp current">
+          <div class="exp-co">
+            <span class="name">Northwestern · Georgia Tech</span>
+            Part-time
+          </div>
+          <div>
+            <h3 class="exp-role">Lead Instructor — Data &amp; AI</h3>
+            <p class="exp-desc">Teaching at two top-tier programs in parallel. Northwestern Data Analytics since 2023; Georgia Tech AI / data curriculum since 2025. Building the next layer of operators who can ship AI in production, not just prototype it.</p>
+            <div class="exp-tags">
+              <span class="pri">Teaching</span>
+              <span>Curriculum</span><span>SQL · Python</span><span>Mentorship</span>
+            </div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-meta-row"><span class="key">NU</span> &nbsp; Since 2023</div>
+            <div class="exp-meta-row"><span class="key">GT</span> &nbsp; Since 2025</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= STACK ============= -->
+  <div class="panel elev">
+    <section id="stack">
+      <div class="section-head">
+        <div class="section-tag">04 / Stack</div>
+        <h2 class="section-title">A diverse toolkit. <span class="dim">AI primary, mobile + platform secondary.</span></h2>
+      </div>
+      <div class="stack-table">
+
+        <div class="stack-row featured">
+          <div class="stack-cat">Frontier Models</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-claude"/></svg>Anthropic Claude</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-gemini"/></svg>Google Gemini</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-spark"/></svg>OpenAI</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-cloud"/></svg>Microsoft Foundry</span>
+          </div>
+        </div>
+
+        <div class="stack-row featured">
+          <div class="stack-cat">Agents &amp; Orchestration</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-mcp"/></svg>MCP</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-net"/></svg>Agent Systems</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-layers"/></svg>RAG · Retrieval</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-layers"/></svg>Vector Search</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-code"/></svg>Claude Code</span>
+            <span class="tool"><svg style="color:var(--ember)"><use href="#i-spark"/></svg>Prompt Caching</span>
+          </div>
+        </div>
+
+        <div class="stack-row secondary">
+          <div class="stack-cat">Mobile &amp; Retail Apps</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--amber)"><use href="#i-droid"/></svg>Android</span>
+            <span class="tool"><svg style="color:var(--amber)"><use href="#i-code"/></svg>Kotlin</span>
+            <span class="tool"><svg style="color:var(--amber)"><use href="#i-mobile"/></svg>Jetpack Compose</span>
+            <span class="tool"><svg style="color:var(--amber)"><use href="#i-box"/></svg>Gradle</span>
+            <span class="tool"><svg style="color:var(--amber)"><use href="#i-cloud"/></svg>Firebase</span>
+            <span class="tool"><svg style="color:var(--amber)"><use href="#i-mobile"/></svg>POS Systems</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-cat">Languages</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--rust)"><use href="#i-flask"/></svg>Python</span>
+            <span class="tool"><svg style="color:var(--rust)"><use href="#i-db"/></svg>SQL</span>
+            <span class="tool"><svg style="color:var(--rust)"><use href="#i-code"/></svg>TypeScript</span>
+            <span class="tool"><svg style="color:var(--rust)"><use href="#i-graph"/></svg>R</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-cat">AWS · Cloud Data</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--gold)"><use href="#i-cloud"/></svg>AWS</span>
+            <span class="tool"><svg style="color:var(--gold)"><use href="#i-pipe"/></svg>Glue</span>
+            <span class="tool"><svg style="color:var(--gold)"><use href="#i-sigma"/></svg>Athena</span>
+            <span class="tool"><svg style="color:var(--gold)"><use href="#i-db"/></svg>Redshift</span>
+            <span class="tool"><svg style="color:var(--gold)"><use href="#i-server"/></svg>S3</span>
+            <span class="tool"><svg style="color:var(--gold)"><use href="#i-chip"/></svg>Lambda</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-cat">Product &amp; Delivery</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--moss)"><use href="#i-ticket"/></svg>Jira</span>
+            <span class="tool"><svg style="color:var(--moss)"><use href="#i-net"/></svg>Scrum</span>
+            <span class="tool"><svg style="color:var(--moss)"><use href="#i-graph"/></svg>Roadmap Strategy</span>
+            <span class="tool"><svg style="color:var(--moss)"><use href="#i-ticket"/></svg>Backlog Ownership</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-cat">Analytics</div>
+          <div class="tools">
+            <span class="tool"><svg style="color:var(--rose)"><use href="#i-bars"/></svg>Tableau</span>
+            <span class="tool"><svg style="color:var(--rose)"><use href="#i-bars"/></svg>Power BI</span>
+            <span class="tool"><svg style="color:var(--rose)"><use href="#i-bars"/></svg>Looker</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= CREDENTIALS ============= -->
+  <div class="panel">
+    <section id="credentials">
+      <div class="section-head">
+        <div class="section-tag">05 / Credentials</div>
+        <h2 class="section-title">Top-tier Product Owner. <span class="dim">All three Scrum Alliance levels.</span></h2>
+      </div>
+      <div class="creds-block">
+        <div class="creds-img">
+          <span class="creds-img-label">Scrum Alliance · 2025</span>
+          <img src="assets/scrum-badges.jpg" alt="CSPO, A-CSPO, CSP-PO" loading="lazy">
+        </div>
+        <div class="creds-text">
+          <h3>Three tiers. <span class="ember">One mindset.</span></h3>
+          <p>I hold all three Scrum Alliance Product Owner credentials, including <strong>CSP-PO</strong> — the highest tier they offer.</p>
+          <ul class="creds-list">
+            <li><span class="level">CSPO</span><span>Certified Scrum Product Owner</span></li>
+            <li><span class="level">A-CSPO</span><span>Advanced Certified Scrum Product Owner</span></li>
+            <li><span class="level">CSP-PO</span><span>Certified Scrum Professional · Product Owner</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= WORK ============= -->
+  <div class="panel elev">
+    <section id="work">
+      <div class="section-head">
+        <div class="section-tag">06 / Work</div>
+        <h2 class="section-title">Selected open-source &amp; technical work. <span class="dim">The portfolio behind the product.</span></h2>
+      </div>
+      <div class="projects">
+
+        <a class="project" href="https://github.com/GambitAcid/NFL-Fantasy-AI-Draft-Predictor" target="_blank" rel="noopener">
+          <div class="proj-num">/01</div>
+          <div class="proj-body">
+            <h3 class="proj-title">NFL Fantasy AI Draft Predictor <span class="new">2025</span></h3>
+            <p class="proj-desc">AI-driven draft assistant blending model predictions with live decision support. End-to-end product thinking applied to a domain people care about.</p>
+            <div class="proj-tags">
+              <span class="pri">Applied AI</span>
+              <span>Python</span><span>Predictive Modeling</span><span>Product</span>
+            </div>
+          </div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="key">Year</span> &nbsp; 2025</div>
+            <div class="proj-meta-row"><span class="key">Type</span> &nbsp; Solo</div>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <a class="project" href="https://github.com/GambitAcid/Alphabet-Soup-Charity-Funding-Tool" target="_blank" rel="noopener">
+          <div class="proj-num">/02</div>
+          <div class="proj-body">
+            <h3 class="proj-title">Charity Funding Predictor</h3>
+            <p class="proj-desc">Neural network on 34K+ nonprofit applications to predict funding success. Architecture iteration, dropout regularization, baseline lift.</p>
+            <div class="proj-tags">
+              <span class="pri">Deep Learning</span>
+              <span>TensorFlow</span><span>Keras</span>
+            </div>
+          </div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="key">Year</span> &nbsp; 2022</div>
+            <div class="proj-meta-row"><span class="key">Type</span> &nbsp; Solo</div>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <a class="project" href="https://github.com/GambitAcid/Predicting-Credit-Risk-with-Supervised-Machine-Learning" target="_blank" rel="noopener">
+          <div class="proj-num">/03</div>
+          <div class="proj-body">
+            <h3 class="proj-title">Credit Risk Classifier</h3>
+            <p class="proj-desc">Logistic Regression vs. Random Forest on LendingClub data. Trade-off analysis built to defend in front of risk officers.</p>
+            <div class="proj-tags">
+              <span class="pri">Supervised ML</span>
+              <span>scikit-learn</span><span>Random Forest</span>
+            </div>
+          </div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="key">Year</span> &nbsp; 2022</div>
+            <div class="proj-meta-row"><span class="key">Type</span> &nbsp; Solo</div>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <a class="project" href="https://github.com/GambitAcid/Analyzing-Gun-Violence-and-Control-in-America" target="_blank" rel="noopener">
+          <div class="proj-num">/04</div>
+          <div class="proj-body">
+            <h3 class="proj-title">Gun Violence Analysis</h3>
+            <p class="proj-desc">Team-built Flask + PostgreSQL platform with interactive Leaflet + D3 visualizations. Pattern recognition on heavy data.</p>
+            <div class="proj-tags">
+              <span class="pri">Full Stack</span>
+              <span>Flask</span><span>PostgreSQL</span><span>D3</span>
+            </div>
+          </div>
+          <div class="proj-meta">
+            <div class="proj-meta-row"><span class="key">Year</span> &nbsp; 2022</div>
+            <div class="proj-meta-row"><span class="key">Type</span> &nbsp; Team</div>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <a class="project" href="https://github.com/GambitAcid" target="_blank" rel="noopener">
+          <div class="proj-num">/···</div>
+          <div class="proj-body">
+            <h3 class="proj-title">More on GitHub</h3>
+            <p class="proj-desc">Full archive of public repos, sandbox experiments, and earlier work.</p>
+            <div class="proj-tags"><span>github.com/GambitAcid</span></div>
+          </div>
+          <div class="proj-meta"></div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= EDUCATION ============= -->
+  <div class="panel">
+    <section id="background">
+      <div class="section-head">
+        <div class="section-tag">07 / Education</div>
+        <h2 class="section-title">Continuous learning. <span class="dim">Always studying.</span></h2>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-row">
+          <div class="tl-year">
+            2025
+            <span class="label">Certifications</span>
+          </div>
+          <div>
+            <h3 class="tl-title">Product Ownership · Agile Tooling</h3>
+            <div class="tl-org">Scrum Alliance · Udemy</div>
+          </div>
+          <ul class="tl-cert-list">
+            <li>Certified Scrum Professional — Product Owner (CSP-PO)</li>
+            <li>Advanced Certified Scrum Product Owner (A-CSPO)</li>
+            <li>Complete JIRA + Confluence Professional Certification</li>
+          </ul>
+        </div>
+
+        <div class="tl-row combined">
+          <div class="tl-year">
+            2022
+            <span class="label">Certification</span>
+          </div>
+          <div class="tl-orgs">
+            <div class="tl-org-block">
+              <div>
+                <h3 class="tl-title">Data Science &amp; Analytics Boot Camp</h3>
+                <div class="tl-org">Georgia Institute of Technology</div>
+              </div>
+              <p class="tl-desc">Python, SQL, ML, deep learning, full-stack data apps, BI tooling.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-row combined">
+          <div class="tl-year">
+            2019 / 2016
+            <span class="label">M.S. / B.S.</span>
+          </div>
+          <div class="tl-orgs">
+            <div class="tl-org-block">
+              <div>
+                <h3 class="tl-title">M.S. Applied &amp; Environmental Microbiology</h3>
+                <div class="tl-org">Georgia State University</div>
+              </div>
+              <p class="tl-desc">Bioinformatics, computational analysis. Same scientific instinct, applied to product.</p>
+            </div>
+            <div class="tl-org-block">
+              <div>
+                <h3 class="tl-title">B.S. Biology, Minor in Chemistry</h3>
+                <div class="tl-org">Clayton State University</div>
+              </div>
+              <p class="tl-desc">Reproducibility-first thinking. Translates directly to AI systems that hold up.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= CONTACT ============= -->
+  <section id="contact" class="contact">
+    <h2 class="contact-headline">
+      Let's talk <span class="ember">frontier AI</span> <span class="dim">in the real world.</span>
+    </h2>
+    <p class="contact-sub">Connect on the AI product, retail tech, and operator-grade AGI questions worth answering. Speaking, collaboration, or notes — reach out.</p>
+
+    <div class="contact-actions">
+      <a href="https://www.linkedin.com/in/ronniephillips-ii/" class="btn primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.78-1.75-1.74s.78-1.74 1.75-1.74 1.75.78 1.75 1.74c0 .96-.78 1.74-1.75 1.74zm13.5 12.27h-3v-5.34c0-1.27-.02-2.91-1.77-2.91-1.78 0-2.05 1.39-2.05 2.82v5.43h-3v-11h2.88v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6v6.46z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/GambitAcid" class="btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.13c-3.2.69-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18.92-.26 1.9-.39 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:ronnie.phillips@carters.com" class="btn icon-only" aria-label="Email" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============= FOOTER ============= -->
+  <footer>
+    <div class="commit">
+      <span class="pulse"></span>
+      <span>RONNIE PHILLIPS · 2026</span>
+    </div>
+    <div class="build">FRONTIER AI · MOBILE · PRODUCT</div>
   </footer>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-  <script src="static/js/now-ui-kit.js?v=1.1.0"></script>
-  <script src="static/js/aos.js"></script>
-  <script src="static/js/main.js"></script>
 
+  <script>
+    const nav = document.getElementById('nav');
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+
+      // Drive ambient layer
+      const max = Math.max(window.innerHeight * 1.2, 600);
+      const t = Math.min(1, y / max);
+      document.documentElement.style.setProperty('--scroll', t.toFixed(3));
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Reveal animations
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('section, .project, .stack-row, .tl-row, .stat, .meta-row, .exp, .shipped').forEach((el) => {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+
+    // Panel hairline drawing + section-head scanline
+    const panelIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          panelIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.panel, .section-head').forEach((el) => {
+      panelIO.observe(el);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          const t = document.querySelector(id);
+          if (t) {
+            e.preventDefault();
+            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
 </body>
+</html>
